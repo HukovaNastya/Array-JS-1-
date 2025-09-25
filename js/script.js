@@ -15,7 +15,8 @@ const inventors = [
     { first: 'Ada', last: 'Lovelace', year: 1815, passed: 1852 },
     { first: 'Sarah E.', last: 'Goode', year: 1855, passed: 1905 },
     { first: 'Lise', last: 'Meitner', year: 1878, passed: 1968 },
-    { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 }
+    { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 },
+    { first: 'Mister', last: 'X', year: 1329, passed: 1409 }
 ];
 
 const people = [
@@ -28,17 +29,30 @@ const people = [
 
 // Array.prototype.filter()
 // 1. Filter the list of inventors for those who were born in the 1500's
+const bornIn1500 = inventors.filter(inventor =>  inventor.year >=1500 && inventor.year <= 1600)
+console.log(bornIn1500)
 
 // Array.prototype.map()
 // 2. Give us an array of the inventors first and last names
+const fullNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`)
 
+console.log(fullNames)
 // Array.prototype.sort()
 // 3. Sort the inventors by birthdate, oldest to youngest
+const InventorsAges = inventors.sort((firstInventor, secondInventor) =>  firstInventor.year - secondInventor.year );
+console.log(InventorsAges)
 
 // Array.prototype.reduce()
 // 4. How many years did all the inventors live all together?
 
+const amountOfYears = inventors.reduce((accumulator, inventor) => {
+    return accumulator + (inventor.passed - inventor.year)
+}, 0)
+
+console.log(amountOfYears)
+
 // 5. Sort the inventors by years lived
+
 
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -46,7 +60,21 @@ const people = [
 
 // 7. sort Exercise
 // Sort the people alphabetically by last name
+const arrayOfNames = people.map(person => {
+    const [lastName, firstName] = person.split(', ');
+    return {lastName, firstName};
+}).sort((firstPerson, secondPerson) =>   secondPerson.lastName < firstPerson.lastName ? 1 :-1 );
+
+
+console.log(arrayOfNames)
 
 // 8. Reduce Exercise
 // Sum up the instances of each of these
 const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+const amountOfVehicle = data.reduce((acc, vehicle) => {
+    acc[vehicle] = (acc[vehicle] || 0) + 1;
+    return acc;
+},{})
+
+console.log(amountOfVehicle)
